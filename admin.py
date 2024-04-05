@@ -295,18 +295,31 @@ class Student:
         con.close()
     
     def search_data(self):
-        con = pymysql.connect(host="localhost", user="root", password="", database="stm")
-        cur = con.cursor()
+        try:
+            con = pymysql.connect(host="localhost", user="root", password="", database="stm")
+            cur = con.cursor()
 
-        
-        cur.execute("SELECT * FROM student WHERE " + str(self.search_by.get()) + " LIKE '%" + str(self.search_txt.get()) + "%'")
-        rows = cur.fetchall()
-        if len(rows) != 0:
+            search_field = self.search_by.get()
+            search_text = self.search_txt.get()
+
+            # Using parameterized query to prevent SQL injection
+            query = f"SELECT * FROM student WHERE {search_field} = %s"
+            cur.execute(query, (search_text,))
+            
+            rows = cur.fetchall()
             self.Student_table.delete(*self.Student_table.get_children())
-        for row in rows:
-            self.Student_table.insert('', END, values=row)
-        con.commit()
-        con.close()
+            for row in rows:
+                self.Student_table.insert('', END, values=row)
+
+        except pymysql.Error as e:
+            print(f"Error: {e}")
+            # Handle error as needed
+        
+        finally:
+            # Close the database connection
+            if con:
+                con.close()
+
 
 root = Tk()
 obj = Student(root)

@@ -2,20 +2,28 @@ import tkinter as tk
 import subprocess
 
 def login():
-    # Placeholder function for login functionality
-    # Here you would verify the credentials entered by the user
-    # For simplicity, let's assume username and password are hard-coded
-    username = username_entry.get()
-    password = password_entry.get()
-    if username == "admin" and password == "adminpass":
-        # Redirect to admin dashboard
-        subprocess.Popen(["python", "admin.py"])
-        window.destroy()  # Close the current login window
-    elif username == "user" and password == "userpass":
-        # Placeholder for user dashboard
-        print("Logged in as user")
-    else:
-        # Handle invalid login
+    # Get the entered username and password
+    entered_username = username_entry.get()
+    entered_password = password_entry.get()
+
+    # Set a flag to indicate whether a valid user has been found
+    valid_user_found = False
+
+    # Check if entered credentials match any student's credentials
+    with open("password.txt", "r") as password_file:
+        for line in password_file:
+            data = line.strip().split()
+            if len(data) >= 3:
+                _, username, password = data
+                if entered_username == username and entered_password == password:
+                    # Redirect to student dashboard
+                    subprocess.Popen(["python", "student_dashboard.py"])
+                    window.destroy()  # Close the current login window
+                    return
+                valid_user_found = True  # Set the flag to True if at least one valid user is found
+
+    # Handle invalid login
+    if not valid_user_found:
         print("Invalid username or password")
 
 window = tk.Tk()

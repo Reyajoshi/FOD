@@ -1,0 +1,21 @@
+Activity		Role		Student
+Debate Club		Debater		Harry
+Chess Team		Player		Riley
+Math Club		Volunteer	Reyan
+Drama Club		Actor		Steven
+Music Club		Guitarist	Ivett
+Dance Club		Dancer		Elissa
+Art Club		Artist		Renell
+Sports Team		Athlete		Pearl
+Coding Club		Coder		Elle
+Tech Group		Techie		Wynn
+Drama Crew		Director	Reya
+Math Team		Mathlete	Alias
+Art Society		Artist		Lienet
+Dance Crew		Dancer      Patrick		
+MUN Club		Diplomat	Lenel
+Culinary Club	Chef		Petra
+Events        Organizer		Hrida
+Debate Club		Debater		Helen
+Movie Club		Director	Ryan
+Dance Crew		Dancer		Shrey
